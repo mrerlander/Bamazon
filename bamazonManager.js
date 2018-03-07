@@ -53,9 +53,7 @@ function managerStart() {
 
 function printProducts() {
     connection.query("SELECT * FROM products", function (err, res) {
-        for (var i = 0; i < res.length; i++) {
-            productData.push(res[i]);
-        }
+        loop(res);
 
         var productTable = new Table;
 
@@ -76,9 +74,7 @@ function printProducts() {
 
 function lowInventory() {
     connection.query("SELECT * FROM products WHERE stock_quantity <= '10'", function (err, res) {
-        for (var i = 0; i < res.length; i++) {
-            productData.push(res[i]);
-        }
+        loop(res);
 
         var lowTable = new Table;
 
@@ -99,9 +95,7 @@ function lowInventory() {
 
 function addInventory() {
     connection.query("SELECT * FROM products", function (err, res) {
-        for (var i = 0; i < res.length; i++) {
-            productData.push(res[i]);
-        }
+        loop(res);
         inquirer.prompt([{
             type: "list",
             message: "Choose the product you would like to add stock to.",
@@ -204,4 +198,10 @@ function startOver() {
             connection.end();
         }
     });
+}
+
+function loop(res){
+    for (var i = 0; i < res.length; i++) {
+        productData.push(res[i]);
+    };
 }
