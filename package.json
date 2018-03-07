@@ -1,0 +1,28 @@
+{
+  "name": "bamazon",
+  "version": "1.0.0",
+  "description": "Command Line Storefront",
+  "main": "bamazon.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/mrerlander/Bamazon.git"
+  },
+  "keywords": [
+    "store",
+    "mysql"
+  ],
+  "author": "Michael Erlander",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/mrerlander/Bamazon/issues"
+  },
+  "homepage": "https://github.com/mrerlander/Bamazon#readme",
+  "dependencies": {
+    "cli-table": "^0.3.1",
+    "inquirer": "^5.1.0",
+    "mysql": "^2.15.0"
+  }
+}
