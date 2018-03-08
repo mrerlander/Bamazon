@@ -45,7 +45,7 @@ function supervisorStart() {
 // SELECT department_id, department_name, over_head_costs, SUM(products.product_sales) AS department_sales, (department.over_head_costs - SUM(products.product_sales) AS total_profit FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY products.department_name
 
 function printSales() {
-    connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS department_sales, (SUM(products.product_sales) - departments.over_head_costs) AS total_profit FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY departments.department_name ORDER BY departments.department_id", function (err, res) {
+    connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS department_sales, (SUM(products.product_sales) - departments.over_head_costs) AS total_profit FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY products.department_name ORDER BY departments.department_id", function (err, res) {
         loop(res);
 
         var productTable = new Table;
@@ -108,7 +108,6 @@ function startOver() {
 }
 
 function loop(res) {
-    console.log(res);
     for (var i = 0; i < res.length; i++) {
         if (!res[i].department_sales){
             res[i].department_sales = 0;
