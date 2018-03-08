@@ -27,3 +27,18 @@ VALUES ("pillow", "bedding", 45, 20);
 
 INSERT INTO products (product_name, department_name, price, stock_quantity)
 VALUES ("comforter", "bedding", 80, 11);
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("electronics", "5000");
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("housewares", "3000");
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("jewelry", "7500");
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("bedding", "5000");
+
+INSERT INTO departments (department_name, over_head_costs)
+VALUES ("grocery", "1000");

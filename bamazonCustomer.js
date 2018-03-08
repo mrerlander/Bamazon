@@ -68,9 +68,10 @@ function buyProduct() {
                 if (parseInt(purchase.quantity) === 0) {
                     buyProduct();
                 } else {
-
+                    
                     connection.query("UPDATE products SET ? WHERE ?", [{
-                            stock_quantity: chosenProduct.stock_quantity - purchase.quantity
+                            stock_quantity: (chosenProduct.stock_quantity - purchase.quantity),
+                            product_sales: (chosenProduct.price * purchase.quantity)
                         },
                         {
                             item_id: chosenProduct.item_id
