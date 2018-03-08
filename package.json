@@ -21,6 +21,7 @@
   },
   "homepage": "https://github.com/mrerlander/Bamazon#readme",
   "dependencies": {
+    "colors": "^1.1.2",
     "easy-table": "^1.1.1",
     "inquirer": "^5.1.0",
     "mysql": "^2.15.0"

@@ -1,6 +1,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 var Table = require("easy-table");
+var colors = require("colors/safe");
 
 var productData = [];
 
@@ -18,9 +19,9 @@ var connection = mysql.createConnection({
 
 connection.connect(function (err, res) {
     if (err) throw err;
-    console.log("---------------------------------");
-    console.log("|    Welcome Bamazon manager    |");
-    console.log("---------------------------------");
+    console.log(colors.cyan("---------------------------------"));
+    console.log(colors.cyan("|    Welcome Bamazon manager    |"));
+    console.log(colors.cyan("---------------------------------"));
     managerStart();
 });
 
@@ -115,7 +116,7 @@ function addInventory() {
                 } else if (!isNaN(value) && value === 0) {
                     managerStart();
                 } else if (!isNaN(value) && value < 0) {
-                    console.log("\nNegative values are not allowed. To go to the main menu, type '0'.");
+                    console.log(colors.red("\nNegative values are not allowed. To go to the main menu, type '0'."));
                 } else {
                     return false;
                 }
@@ -136,7 +137,7 @@ function addInventory() {
                 item_id: chosenProduct.item_id
             }], function (error) {
                 if (error) throw error;
-                console.log("Successfully added " + answers.quantity + " to " + answers.product);
+                console.log(colors.green("Successfully added " + answers.quantity + " to " + answers.product));
                 startOver();
             });
         });
@@ -178,7 +179,7 @@ function newProduct() {
             stock_quantity: answers.itemStock
         }, function (err) {
             if (err) throw err;
-            console.log(answers.itemName + " was succesfully added.");
+            console.log(colors.green(answers.itemName + " was succesfully added."));
             startOver();
         });
     });
@@ -194,7 +195,7 @@ function startOver() {
             productData = [];
             managerStart();
         } else {
-            console.log("Bye!");
+            console.log(colors.yellow("Bye!"));
             connection.end();
         }
     });

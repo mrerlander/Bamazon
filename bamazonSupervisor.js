@@ -1,6 +1,7 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
 var Table = require("easy-table");
+var colors = require("colors/safe");
 
 var productData = [];
 
@@ -18,9 +19,9 @@ var connection = mysql.createConnection({
 
 connection.connect(function (err, res) {
     if (err) throw err;
-    console.log("---------------------------------");
-    console.log("|  Welcome Bamazon supervsior!  |");
-    console.log("---------------------------------");
+    console.log(colors.cyan("---------------------------------"));
+    console.log(colors.cyan("|  Welcome Bamazon supervsior!  |"));
+    console.log(colors.cyan("---------------------------------"));
     supervisorStart();
 });
 
@@ -42,7 +43,6 @@ function supervisorStart() {
         }
     });
 }
-// SELECT department_id, department_name, over_head_costs, SUM(products.product_sales) AS department_sales, (department.over_head_costs - SUM(products.product_sales) AS total_profit FROM departments INNER JOIN products ON departments.department_name = products.department_name GROUP BY products.department_name
 
 function printSales() {
     connection.query("SELECT departments.department_id, departments.department_name, departments.over_head_costs, SUM(products.product_sales) AS department_sales, (SUM(products.product_sales) - departments.over_head_costs) AS total_profit FROM departments LEFT JOIN products ON departments.department_name = products.department_name GROUP BY products.department_name ORDER BY departments.department_id", function (err, res) {
@@ -85,7 +85,7 @@ function createDepartment() {
             over_head_costs: answers.deptCost,
         }, function (err) {
             if (err) throw err;
-            console.log(answers.deptName + " was succesfully added.");
+            console.log(colors.green(answers.deptName + " was succesfully added."));
             startOver();
         });
     });
@@ -101,7 +101,7 @@ function startOver() {
             productData = [];
             supervisorStart();
         } else {
-            console.log("Bye!");
+            console.log(colors.yellow("Bye!"));
             connection.end();
         }
     });

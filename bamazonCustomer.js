@@ -1,5 +1,6 @@
 var inquirer = require("inquirer");
 var mysql = require("mysql");
+var colors = require("colors/safe");
 
 var productData = [];
 
@@ -17,10 +18,10 @@ var connection = mysql.createConnection({
 
 connection.connect(function (err, res) {
     if (err) throw err;
-    console.log("---------------------------------");
-    console.log("|      Welcome to Bamazon!      |");
-    console.log("|    The command line market    |");
-    console.log("---------------------------------");
+    console.log(colors.cyan("---------------------------------"));
+    console.log(colors.cyan("|      Welcome to Bamazon!      |"));
+    console.log(colors.cyan("|    The command line market    |"));
+    console.log(colors.cyan("---------------------------------"));
     buyProduct();
 });
 
@@ -55,10 +56,10 @@ function buyProduct() {
                     if (!isNaN(quantity) && quantity < chosenProduct.stock_quantity && quantity >= 0) {
                         return true;
                     } else if (!isNaN(quantity) && quantity > chosenProduct.stock_quantity) {
-                        console.log("\nSorry. There is insufficient stock for that purchase. Try again.")
+                        console.log(colors.red("\nSorry. There is insufficient stock for that purchase. Try again."));
                         return false;
                     } else if (!isNaN(quantity) && quantity < 0) {
-                        console.log("\nNegative quantities are not allowed. To start over, choose 0.")
+                        console.log(colors.red("\nNegative quantities are not allowed. To start over, choose 0."));
                     } else {
                         return false;
                     }
@@ -78,7 +79,7 @@ function buyProduct() {
                         }
                     ], function (error) {
                         if (error) throw error;
-                        console.log("Purchase made! You bought " + purchase.quantity + " " + chosenProduct.product_name + " for $" + (parseFloat(chosenProduct.price).toFixed(2)) * parseInt(purchase.quantity));
+                        console.log(colors.green("Purchase made! You bought " + purchase.quantity + " " + chosenProduct.product_name + " for $" + (parseFloat(chosenProduct.price).toFixed(2)) * parseInt(purchase.quantity)));
                         buyAgain();
                     });
                 }
@@ -96,7 +97,7 @@ function buyAgain() {
         if (userRes.confirmation) {
             buyProduct();
         } else {
-            console.log("Thanks for shopping! Come back soon!");
+            console.log(colors.yellow("Thanks for shopping! Come back soon!"));
             connection.end();
         }
     });
